@@ -1,24 +1,28 @@
-import 'dart:io'; // Add this line at the top
+// codigo para testar interatividade da linha de comando (CLI) em Dart. Ele suporta os seguintes comandos:
+// - `help`: Exibe as instruções de uso.
+// - `version`: Exibe a versão do CLI.
+// - `search <ARTICLE-TITLE>`: Permite ao usuário pesquisar um artigo na "D
 
-const version = '0.0.1'; // Add this line
+import 'dart:io'; 
 
+// resposta dada pelo 'version' do CLI. Você pode alterar o número da versão conforme necessário para refletir as atualizações do seu CLI.
+const version = '0.0.1'; 
+
+// função para imprimir as instruções de uso do CLI. Ela é chamada quando o usuário solicita ajuda ou quando um comando inválido é fornecido.
 void printUsage() {
-  // Add this new function
   print(
     "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'",
   );
 }
 
+// função para simular a pesquisa de um artigo na "Dartpedia". Ela aceita uma lista de argumentos, que pode ser nula ou vazia. Se os argumentos forem nulos ou vazios, a função solicitará ao usuário que insira um título de artigo. Caso contrário, ela juntará os argumentos para formar o título do artigo e simulará a exibição do resultado da pesquisa.
 void searchWikipedia(List<String>? arguments) {
   final String articleTitle;
 
-  // If the user didn't pass in arguments, request an article title.
   if (arguments == null || arguments.isEmpty) {
     print('Please provide an article title.');
-    // Await input and provide a default empty string if the input is null.
     articleTitle = stdin.readLineSync() ?? '';
   } else {
-    // Otherwise, join the arguments into the CLI into a single string
     articleTitle = arguments.join(' ');
   }
 
@@ -27,9 +31,9 @@ void searchWikipedia(List<String>? arguments) {
   print('(Pretend this is an article about "$articleTitle")');
 }
 
-
-
+// função principal do programa, que é o ponto de entrada para a execução do CLI. Ele recebe uma lista de argumentos da linha de comando e determina qual ação executar com base no primeiro argumento. Se o primeiro argumento for 'help', ele chama a função `printUsage()`. Se for 'version', ele imprime a versão do CLI. Se for 'search', ele chama a função `searchWikipedia()` passando os argumentos restantes. Se nenhum comando válido for fornecido, ele também chama `printUsage()` para orientar o usuário.
 void main(List<String> arguments) {
+  // recebe o arguments. firts para determinar a ação a ser executada. Ele verifica se os argumentos estão vazios ou se o primeiro argumento é 'help', caso em que chama a função `printUsage()`. Se o primeiro argumento for 'version', ele imprime a versão do CLI. Se o primeiro argumento for 'search', ele chama a função `searchWikipedia()` passando os argumentos restantes (se houver). Se nenhum comando válido for fornecido, ele também chama `printUsage()` para orientar o usuário sobre os comandos disponíveis.
   if (arguments.isEmpty || arguments.first == 'help') {
     printUsage();
   } else if (arguments.first == 'version') {
