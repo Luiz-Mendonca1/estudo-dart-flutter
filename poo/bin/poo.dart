@@ -3,20 +3,19 @@ import 'package:poo/conta.dart';
 void main() {
   Conta contaJoao = Conta('João', 500.0);
   Conta contaThais = Conta('Thais', -2500.0);
+  ContaPoupanca contaPoupanca = ContaPoupanca('Maria', 1000.0, 0.05);
+  ContaCorrente contaCorrente = ContaCorrente('Carlos', 2000.0, 500.0);
 
   List<Conta> contas = [contaJoao, contaThais];
 
-  for (var conta in contas) {
-    conta.imprimirSaldo(conta);
-  }
+  contaPoupanca.imprimirSaldo(contaPoupanca);
+  contaCorrente.imprimirSaldo(contaCorrente);
 
   print('-------------------------------------');
 
-  contaJoao.enviar(100.0);
-  contaThais.receber(100.0);
+  contaPoupanca.aplicarJuros();
+  contaCorrente.enviar(100.0);
 
-  for (var conta in contas) {
-    conta.imprimirSaldo(conta);
-  }
+  contaPoupanca.imprimirSaldo(contaPoupanca);
+  contaCorrente.imprimirSaldo(contaCorrente);
 }
-
